@@ -1,15 +1,15 @@
-package steve.diceroller;
+package steve.diceroller.die;
 
 /**
  * Created by steve on 7/16/15.
  */
-public class Die
+abstract class Die
 {
 
 //  Represents one die (singular of dice) with faces showing values
 //  between 1 and 6.
 
-    private int NUM_OF_SIDES = 6;
+    private int NUM_OF_SIDES;
 
     private int faceValue;  // current value showing on the die
 
