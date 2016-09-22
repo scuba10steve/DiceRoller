@@ -9,9 +9,9 @@
 
     <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:columnCount="4"
-        android:rowCount="5"
+        android:rowCount="6"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -84,6 +84,16 @@
             android:layout_column="2"
             android:textColor="@color/white" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Target: "
+            android:id="@+id/txtTargetNum"
+            android:layout_row="4"
+            android:layout_column="0"
+            android:textColor="@color/white" />
+
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -95,12 +105,12 @@
 
         <TextView
             android:layout_width="fill_parent"
-            android:layout_height="275dp"
+            android:layout_height="255dp"
             android:text="This is where your rolls will show up"
             android:textColor="@color/white"
             android:background="@color/blue"
             android:id="@+id/txtRolls"
-            android:layout_row="4"
+            android:layout_row="5"
             android:layout_column="0"
             android:layout_columnSpan="4"
             android:height="15dp"
@@ -143,6 +153,18 @@
             android:id="@+id/btnRoll"
             android:layout_column="3"
             android:layout_row="0"
-             />
+            android:clickable="true" />
+        <NumberPicker
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/npDieSides"
+            android:orientation="horizontal"
+            android:layout_column="0"
+            android:layout_columnSpan="2"
+            android:layout_row="1"
+            android:textColor="@color/white"
+            android:background="@color/highlighted_text_material_light"
+            android:foreground="@android:color/white" />
+
     </GridLayout>
 </RelativeLayout>

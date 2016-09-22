@@ -3,11 +3,11 @@ package steve.diceroller.die;
 /**
  * Created by steve on 9/17/2016.
  */
-public class HexDie extends Die
+public class FourDie extends Die
 {
-    public HexDie()
+    public FourDie()
     {
         super();
-        this.setNumberOfSides(6);
+        this.setNumberOfSides(4);
     }
 }
