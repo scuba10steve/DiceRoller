@@ -12,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import org.w3c.dom.Text;
+
 /**
  * Created by steve on 9/18/2016.
  * Include anything related to the Interface.  Keep separate from application backend code.
@@ -21,7 +23,7 @@ import android.widget.ToggleButton;
 
 public class DieActivity extends Activity
 {
-    TextView rolls;
+    TextView rolls, txtDieSides;
     EditText editNumOfDice, editRerollAbove, editDoubleAbove;
     ToggleButton btnDouble, btnReroll;
     Button btnRoll, btnPlus, btnMinus;
@@ -69,6 +71,7 @@ public class DieActivity extends Activity
         editRerollAbove = (EditText) findViewById(R.id.txtEditReroll);
 
         npDieSides = (NumberPicker) findViewById(R.id.npDieSides);
+        txtDieSides = (TextView) findViewById(R.id.txtDieSides);
         populateNumberPicker(npDieSides);
     }
 
@@ -97,7 +100,7 @@ public class DieActivity extends Activity
         numbers[6] = Integer.toString(100);
 
         picker.setMinValue(1);
-        picker.setMaxValue(14);
+        picker.setMaxValue(7);
         picker.setWrapSelectorWheel(false);
         picker.setDisplayedValues(numbers);
         picker.setValue(4);

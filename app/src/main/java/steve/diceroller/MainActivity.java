@@ -2,12 +2,18 @@ package steve.diceroller;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.NumberPicker;
 
 import java.util.ArrayList;
 
-import steve.diceroller.die.DieType;
+import steve.diceroller.die.EightDie;
 import steve.diceroller.die.FourDie;
+import steve.diceroller.die.HundredDie;
 import steve.diceroller.die.SixDie;
+import steve.diceroller.die.TenDie;
+import steve.diceroller.die.TwelveDie;
+import steve.diceroller.die.TwentyDie;
+import steve.diceroller.die.base.Die;
 
 
 public class MainActivity extends DieActivity
@@ -15,13 +21,14 @@ public class MainActivity extends DieActivity
     private ArrayList die;
     private int NUMBER_OF_DICE, rerollAbove, doubleAbove;
     private boolean doubl = false, reroll = false;
-    private DieType dieType;
+    private String dieTypeAsString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.loadWidgets();
-        dieType = DieType.SixDie;
+
+        dieTypeAsString = "6";
         NUMBER_OF_DICE = 2;
         die = new ArrayList();
         for (int i = 0; i < NUMBER_OF_DICE; i++)
@@ -85,37 +92,61 @@ public class MainActivity extends DieActivity
                 }
             }
         });
+
+        npDieSides.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                dieTypeAsString = picker.getDisplayedValues()[newVal - 1];
+
+                txtDieSides.setText("Die Sides:" + dieTypeAsString);
+            }
+        });
     }
 
     public void setDice()
     {
-
-//        switch (dieType)
-//        {
-//            case FourDie:
-//                die = new ArrayList<FourDie>();
-//                break;
-//            case SixDie:
-//                die = new ArrayList<SixDie>();
-//                break;
-//            case EightDie:
-//
-//            case TenDie:
-//
-//            case TwelveDie:
-//
-//            case TwentyDie:
-//
-//            default:
-//                throw new IllegalArgumentException("Unable to pick DieType from: " + dieType);
-//        }
-
-        try
-        {
+        try {
             this.NUMBER_OF_DICE = Integer.parseInt(editNumOfDice.getText().toString());
-            die = new ArrayList();
-            for (int i = 0; i < NUMBER_OF_DICE; i++)
-                die.add(new SixDie());
+
+            switch (dieTypeAsString) {
+                case "4":
+                    die = new ArrayList<FourDie>();
+                    for (int i = 0; i < NUMBER_OF_DICE; i++)
+                        die.add(new FourDie());
+                    break;
+                case "6":
+                    die = new ArrayList<SixDie>();
+                    for (int i = 0; i < NUMBER_OF_DICE; i++)
+                        die.add(new SixDie());
+                    break;
+                case "8":
+                    die = new ArrayList<EightDie>();
+                    for (int i = 0; i < NUMBER_OF_DICE; i++)
+                        die.add(new EightDie());
+                    break;
+                case "10":
+                    die = new ArrayList<TenDie>();
+                    for (int i = 0; i < NUMBER_OF_DICE; i++)
+                        die.add(new TenDie());
+                    break;
+                case "12":
+                    die = new ArrayList<TwelveDie>();
+                    for (int i = 0; i < NUMBER_OF_DICE; i++)
+                        die.add(new TwelveDie());
+                    break;
+                case "20":
+                    die = new ArrayList<TwentyDie>();
+                    for (int i = 0; i < NUMBER_OF_DICE; i++)
+                        die.add(new TwentyDie());
+                    break;
+                case "100":
+                    die = new ArrayList<HundredDie>();
+                    for (int i = 0; i < NUMBER_OF_DICE; i++)
+                        die.add(new HundredDie());
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unable to pick DieType from: " + dieTypeAsString);
+            }
         }
         catch (Exception e)
         {
@@ -131,8 +162,34 @@ public class MainActivity extends DieActivity
             //        int dice[] = new int[NUMBER_OF_DICE];
             rolls.setText("");
             //        int i = 0;
+            Die d = null;
             for (Object obj : die) {
-                SixDie d = (SixDie) obj;
+
+                switch (dieTypeAsString)
+                {
+                    case "4":
+                        d = (FourDie) obj;
+                        break;
+                    case "6":
+                        d = (SixDie) obj;
+                        break;
+                    case "8":
+                        d = (EightDie) obj;
+                        break;
+                    case "10":
+                        d = (TenDie) obj;
+                        break;
+                    case "12":
+                        d = (TwelveDie) obj;
+                        break;
+                    case "20":
+                        d = (TwentyDie) obj;
+                        break;
+                    case "100":
+                        d = (HundredDie) obj;
+                        break;
+
+                }
                 d.roll();
                 //            dice[i] = d.getFaceValue();
                 if (reroll && d.getFaceValue() >= rerollAbove) {
